@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 import './sign-in.style.scss'
+import { signInWithGoogle } from '../../firebase/firebase.util'
+
 
 const SignIn = () => {
 
@@ -37,6 +39,7 @@ const SignIn = () => {
                     label='Password'
                     required />     
                 <CustomButton type='submit'> Sign In </CustomButton>
+                <CustomButton onClick={signInWithGoogle}> Sign In with Google </CustomButton>
             </form>
         </div>
     )
