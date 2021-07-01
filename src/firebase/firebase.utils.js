@@ -13,6 +13,36 @@ const config = {
     measurementId: process.env.REACT_APP_MEASUREMENTID
 }
 
+export const createUserProfileDocument = async (userAuth, additionData) => {
+    if(!userAuth) return;
+
+    //userRef is pulling the document from Firestore. Documents are used for CRUD operations
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+    //We are creating a snapshot of the user here
+    const snapShot = await userRef.get()
+    
+    //If there is no data for the userID in the firestore, we are creating it in by setting it via userRef
+    if(!snapShot.exists){
+        const { displayName , email } = userAuth;
+        const createdAt = new Date();
+
+        try{
+         await userRef.set({
+             displayName,
+             email,
+             createdAt,
+             ...additionData
+         })
+        }catch(error) {
+            console.log('error creating user', error.message)
+        }
+    }
+
+    //we're returning userRef if we need it later on.
+    return userRef
+}    
+
 firebase.initializeApp(config);
 
 //importing auth lets us export auth so we can use it anywhere in the app
