@@ -12,11 +12,31 @@ function App() {
   const [user, setUser ] = useState()
 
   useEffect(() => {
-    auth.onAuthStateChanged(async user => {
-      setUser(user)
-      createUserProfileDocument(user)
+    if(user == null){
+      auth.onAuthStateChanged(async user => {
+        if(user){
+          //we are passing the user into createUserProfileDocument and returning the user reference from firestore
+          const userRef = await createUserProfileDocument(user)
+          //a snapshot lets us check if a document exists at this query
+          userRef.onSnapshot(snapShot => {
 
-    })
+            //snapShot doesn't give us access to any of the properties, using snapShot.data() gives us the data in an object
+            console.log(snapShot.data())
+
+            setUser({
+              id:snapShot.id,
+              ...snapShot.data()
+            })
+            console.log(user)
+
+          })
+          // setUser(user)
+          // createUserProfileDocument(user)
+        } else {
+          setUser(user)
+        }
+      })
+    }
 
     console.log(user)
   })
