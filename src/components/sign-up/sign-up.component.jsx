@@ -55,14 +55,6 @@ const SignUp = () => {
                   onChange={handleChange}
                   label='Display Name'
                   required
-                />
-                <FormInput 
-                  type='text'
-                  name='displayName'
-                  value={displayName}
-                  onChange={handleChange}
-                  label='Display Name'
-                  required
                 ></FormInput>
                 <FormInput 
                   type='email'
