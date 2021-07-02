@@ -27,7 +27,7 @@ function App() {
               id:snapShot.id,
               ...snapShot.data()
             })
-            console.log(user)
+
 
           })
           // setUser(user)
