@@ -14,6 +14,8 @@ const SignIn = () => {
 
         const {email, password} = userInfo
         try {
+
+            //auth method where you can pass the email and password to be authenticated
             await auth.signInWithEmailAndPassword(email, password);
 
             setUserInfo(prevState => ({ ...prevState, email: '', password: ''}))
@@ -49,7 +51,7 @@ const SignIn = () => {
                     required />
                 <div className='buttons'>     
                     <CustomButton type='submit'> Sign In </CustomButton>
-                    <CustomButton onClick={signInWithGoogle} isGoogleSignIn> Sign In with Google </CustomButton>
+                    <CustomButton type='button' onClick={signInWithGoogle} isGoogleSignIn> Google Sign In </CustomButton>
                 </div>
             </form>
         </div>

@@ -31,6 +31,8 @@ const SignUp = () => {
         }
 
         try {
+
+            //auth method to create a new user in firebase with email and password
             const { user } = await auth.createUserWithEmailAndPassword(email, password)
 
             await createUserProfileDocument(user, {displayName})
