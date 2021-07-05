@@ -6,9 +6,12 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+import { useDispatch } from 'react-redux'
+import { setCurrentUser } from './redux/user/user.action'
 
 function App() {
 
+  const dispatch = useDispatch();
   const [user, setUser ] = useState()
 
   useEffect(() => {
@@ -22,12 +25,18 @@ function App() {
 
             //snapShot doesn't give us access to any of the properties, using snapShot.data() gives us the data in an object
             console.log(snapShot.data())
-
             setUser({
               id:snapShot.id,
               ...snapShot.data()
             })
 
+            dispatch({
+              type: 'SET_CURRENT_USER',
+              payload: {
+                id:snapShot.id,
+                ...snapShot.data()
+              }
+            })
 
           })
           // setUser(user)
@@ -43,7 +52,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header currentUser={user} />
+      <Header />
       <Switch>
         <Route exact path='/' component={HomePage}/>
         <Route path='/shop' component={ShopPage}/>
