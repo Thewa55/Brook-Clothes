@@ -30,13 +30,10 @@ function App() {
               ...snapShot.data()
             })
 
-            dispatch({
-              type: 'SET_CURRENT_USER',
-              payload: {
-                id:snapShot.id,
-                ...snapShot.data()
-              }
-            })
+            dispatch(setCurrentUser(
+              {id:snapShot.id,
+              ...snapShot.data()}
+            ))
 
           })
           // setUser(user)
