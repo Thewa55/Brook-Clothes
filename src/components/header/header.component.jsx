@@ -12,8 +12,9 @@ import './header.style.scss'
 
 const Header = () => {
     
-    const { currentUser } = useSelector(state=> ({
-        currentUser: state.user.currentUser
+    const { currentUser, cart } = useSelector(state=> ({
+        currentUser: state.user.currentUser,
+        cart: state.cart.hidden
     }))
 
     const dispatch = useDispatch()
@@ -43,7 +44,7 @@ const Header = () => {
             <Link className='option' to='/signin'>SIGN IN</Link>  */}
             <CartIcon/>
         </div>
-        <CartDropdown/>
+        {cart ? null : <CartDropdown />}
     </div>
 )}
 

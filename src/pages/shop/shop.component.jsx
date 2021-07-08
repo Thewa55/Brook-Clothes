@@ -4,8 +4,8 @@ import CollectionPreview from '../../components/collection-preview/collection-pr
 
 const ShopPage = (props) => {
 
-    const [shopData, setShopDate] = useState(SHOP_DATA)
-    console.log(shopData);
+    const [shopData] = useState(SHOP_DATA)
+
     return (
         <div className='shop-page'>
             {shopData.map(({id, ...otherCollectionProps}) => (
