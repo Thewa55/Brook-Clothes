@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/LetterB.jpg'
 import CartIcon from '../cart-icon/cart-icon.component';
-import CartDropdown from '../card-dropdown/card-dropdown.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { auth } from '../../firebase/firebase.utils'
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser } from '../../redux/user/user.action'
@@ -24,7 +24,6 @@ const Header = () => {
         dispatch(setCurrentUser(null))
     }
 
-    console.log(currentUser)
     return (
     <div className='header'>
         <Link className='logo-container' to='/'>
