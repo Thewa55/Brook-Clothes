@@ -4,7 +4,7 @@ import './directory.style.scss'
 
 const Directory = () => {
 
-    const [sections, useSections] = useState([
+    const [sections] = useState([
         {
           title: 'HATS',
           imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
