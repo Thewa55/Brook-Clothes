@@ -9,11 +9,17 @@ const selectCart = state => state;
 export const selectCartItems = createSelector(
     [selectCart],
     cart => cart.cartItems
-)
+);
 
 console.log(selectCart)
 //this second selector calls the select cart items and returns the reduce call
 export const selectCartItemsCount = createSelector(
     [selectCartItems],
     (cartItems) => cartItems.reduce((accumalatedQuantity, cartItem) => accumalatedQuantity + cartItem.quantity, 0)
-)
+);;
+
+export const selectCartHidden = createSelector(
+    [selectCart],
+    cart => cart.hidden
+);
+
