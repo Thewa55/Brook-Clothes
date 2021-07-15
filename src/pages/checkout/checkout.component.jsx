@@ -1,6 +1,7 @@
 import React from 'react';
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
 import { useSelector, useDispatch } from 'react-redux';
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 import './checkout.style.scss'
 
@@ -34,7 +35,7 @@ const CheckoutPage = () => {
         </div>
         {
             cartItems ? cartItems.map(cartItem => 
-                cartItem.name
+                <CheckoutItem key={cartItem.key} cartItem={cartItem} />
             ): (<div> NO ITEMS IN SHOPPING CART</div>)
         }
         <div className='total'>
