@@ -1,6 +1,6 @@
 import React from 'react';
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 import './checkout.style.scss'
@@ -11,6 +11,7 @@ const CheckoutPage = () => {
         cart: state.cart
     }))
 
+    console.log(cart)
     const cartItems = selectCartItems(cart);
     const total = selectCartTotal(cart);
 
