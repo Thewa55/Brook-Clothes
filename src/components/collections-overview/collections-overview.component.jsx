@@ -11,7 +11,8 @@ const CollectionOverview = () => {
         shop: state.shop
     }))
 
-    const shopData = selectShopItems(shop)
+    const shopDatas = selectShopItems(shop)
+    const shopData = Object.keys(shopDatas).map(key=> shopDatas[key])
 
     return (
         <div className='collection-overview'>
