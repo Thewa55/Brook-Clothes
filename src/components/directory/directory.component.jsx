@@ -1,44 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectDirectorySections } from '../../redux/directory/directory.selectors'
 import MenuItem from '../menu-item/menu-item.component'
 import './directory.style.scss'
 
 const Directory = () => {
 
-    const [sections] = useState([
-        {
-          title: 'HATS',
-          imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-          id: 1,
-          linkUrl: 'shop/hats'
-        },
-        {
-          title: 'JACKETS',
-          imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-          id: 2,
-          linkUrl: 'shop/jackets'
-        },
-        {
-          title: 'SNEAKERS',
-          imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-          id: 3,
-          linkUrl: 'shop/sneakers'
-        },
-        {
-          title: 'WOMENS',
-          imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-          size: 'large',
-          id: 4,
-          linkUrl: 'shop/womens'
-        },
-        {
-          title: 'MENS',
-          imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-          size: 'large',
-          id: 5,
-          linkUrl: 'shop/mens'
-        }
-      ])
-    
+    const {directory} = useSelector( state => ({
+      directory: state.directory
+    }))
+
+    const sections = selectDirectorySections(directory)
+
     return (
         <div className='directory'>
             {sections.map(({ id, ...otherSectionProps}) => (
