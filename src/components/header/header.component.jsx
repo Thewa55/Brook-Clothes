@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/LetterB.jpg'
+import Logo from '../../assets/b.png'
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { auth } from '../../firebase/firebase.utils'
