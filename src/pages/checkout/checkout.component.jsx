@@ -12,7 +12,6 @@ const CheckoutPage = () => {
         cart: state.cart
     }))
 
-    console.log(cart)
     const cartItems = selectCartItems(cart);
     const total = selectCartTotal(cart);
 
