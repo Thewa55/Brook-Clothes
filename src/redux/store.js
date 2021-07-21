@@ -6,6 +6,12 @@ import rootReducer from "./root-reducer";
 
 const middlewares = [logger];
 
+
+//Only have logger active only if it's development environment 
+if(process.env.NODE_ENV === 'development'){
+    middlewares.push(logger);
+}
+
 //we are spreading the middleware so if we add more middleware we can add them into the array
 const store = createStore(rootReducer, applyMiddleware(...middlewares))
 

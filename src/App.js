@@ -21,6 +21,8 @@ function App() {
         if(user){
           //we are passing the user into createUserProfileDocument and returning the user reference from firestore
           const userRef = await createUserProfileDocument(user)
+
+          console.log(userRef)
           //a snapshot lets us check if a document exists at this query
           userRef.onSnapshot(snapShot => {
 
