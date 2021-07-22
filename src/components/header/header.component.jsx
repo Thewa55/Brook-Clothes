@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import Logo from '../../assets/b.png'
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -8,8 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser } from '../../redux/user/user.action'
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
-
-import './header.style.scss'
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionLinks, OptionDiv } from './header.styles'
+//import './header.style.scss'
 
 
 
@@ -32,26 +32,26 @@ const Header = () => {
     }
 
     return (
-    <div className='header'>
-        <Link className='logo-container' to='/'>
+    <HeaderContainer>
+        <LogoContainer to='/'>
           <img alt='logo' className='logo' src={Logo}/>
-        </Link>
-        <div className='options'>
-            <Link className='option' to='/shop'>SHOP</Link>
-            <Link className='option' to='/shop'>CONTACT</Link>
+        </LogoContainer>
+        <OptionsContainer>
+            <OptionLinks className='option' to='/shop'>SHOP</OptionLinks>
+            <OptionLinks className='option' to='/shop'>CONTACT</OptionLinks>
             { loggedInUser ? 
                 (  
-                    <div className='option' onClick={logout}>SIGN OUT</div> 
+                    <OptionDiv className='option' onClick={logout}>SIGN OUT</OptionDiv> 
                 ) : ( 
-                    <Link className='option' to='/signin'>SIGN IN</Link> 
+                    <OptionLinks className='option' to='/signin'>SIGN IN</OptionLinks> 
                 )
             }
             {/* <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>     
             <Link className='option' to='/signin'>SIGN IN</Link>  */}
             <CartIcon/>
-        </div>
+        </OptionsContainer>
         {cartVisiblity ? null : <CartDropdown />}
-    </div>
+    </HeaderContainer>
 )}
 
 export default Header;
