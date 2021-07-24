@@ -1,10 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const OptionContainerStyles = css`
-padding: 10px 15px;
-cursor: pointer;
-`
 
 export const HeaderContainer = styled.div`
     height: 70px;
@@ -27,11 +22,22 @@ export const OptionsContainer = styled.div`
     align-items: center;
     justify-content: flex-end;
 `
-
 export const OptionLinks = styled(Link)`
-    ${OptionContainerStyles}
+    padding: 10px 15px;
+    cursor: pointer;
 `
 
-export const OptionDiv = styled.div`
-    ${OptionContainerStyles}
-`
+//With styled components we can import css, and with that we can set the css to a variable and apply the same style to multiple components
+//import styled, { css } from 'styled-components';
+
+// const OptionContainerStyles = css`
+// padding: 10px 15px;
+// cursor: pointer;
+// `
+// export const OptionLinks = styled(Link)`
+//     ${OptionContainerStyles}
+// `
+
+// export const OptionDiv = styled.div`
+//     ${OptionContainerStyles}
+// `
