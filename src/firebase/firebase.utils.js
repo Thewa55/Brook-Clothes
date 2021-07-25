@@ -19,10 +19,19 @@ export const createUserProfileDocument = async (userAuth, additionData) => {
     //userRef is pulling the document from Firestore. Documents are used for CRUD operations
     const userRef = firestore.doc(`users/${userAuth.uid}`);
 
-    //We are creating a snapshot of the user here
+    //collectionRef is pulling a collection (group) of users from Firestore
+    // const collectionRef = firestore.collection(`users`);
+    // console.log(collectionRef)
+
+    //We are retrieving a snapshot of the user here
     const snapShot = await userRef.get()
     
-    //If there is no data for the userID in the firestore, we are creating it in by setting it via userRef
+    //We are retieving a snapshot of the collection here
+    // const collectionSnapShot = await collectionRef.get()
+    // console.log({collectionSnapShot})
+    // console.log({collection: collectionSnapShot.docs.map(doc => doc.data()) })
+
+    //If there is no data for the userID in the firestore, we are creating a new user document in firestore.
     if(!snapShot.exists){
         const { displayName , email } = userAuth;
         const createdAt = new Date();
