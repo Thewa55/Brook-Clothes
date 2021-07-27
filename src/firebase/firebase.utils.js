@@ -56,6 +56,8 @@ export const addCollectionAndDocuments = async ( collectionKey, objectsToAdd) =>
     const collectionRef = firestore.collection(collectionKey);
     console.log(collectionRef);
 
+    //A batch is getting a list of records and importing them together as one job
+    //Currently we have 5 different store items and if an internet connection issue occurs we will lose data
     const batch = firestore.batch();
     objectsToAdd.forEach(object => {
         //asking firebase to return an empty document in this collection
@@ -64,6 +66,22 @@ export const addCollectionAndDocuments = async ( collectionKey, objectsToAdd) =>
     })
 
     return await batch.commit();
+}
+
+export const convertCollectionSnapshotToMap = (collections) => {
+
+    const transformedCollection = collections.docs.map( doc => {
+
+        const { title, items} = doc.data();
+        return { 
+            routeName: encodeURI(title.toLowerCase()),
+            id: doc.id,
+            title,
+            items
+        }
+    })
+
+    console.log(transformedCollection)
 }
 
 firebase.initializeApp(config);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 //import SHOP_DATA from './shopData';
 //import CollectionPreview from '../../components/collection-preview/collection-preview.component'
@@ -6,9 +6,19 @@ import { Route } from 'react-router-dom';
 //import { useSelector } from 'react-redux';
 import CollectionOverview from '../../components/collections-overview/collections-overview.component';
 import CollectionPage from '../collection/collection.component';
+import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils'
 
 const ShopPage = ({match}) => {
 
+    const unsubscribeFromSnapShot = null;
+
+    useEffect(() => {
+        const collectionRef = firestore.collection('collections')
+
+        collectionRef.onSnapshot(async snapshot => {
+            convertCollectionSnapshotToMap(snapshot)
+        })
+    })
     // const { shop } = useSelector( state => ({
     //     shop: state.shop
     // }))

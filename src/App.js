@@ -6,7 +6,8 @@ import ShopPage from './pages/shop/shop.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils'
+// import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils'
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.action'
 import { selectShopItems } from './redux/shop/shop.selectors'
@@ -16,14 +17,14 @@ function App() {
   const dispatch = useDispatch();
   const [user, setUser ] = useState();
 
-  const { shop } = useSelector( state => ({
-    shop: state.shop
-  }))
-  console.log(shop)
-  const shopDatas = selectShopItems(shop);
+  //Code for putting store data into Firebase (one time data transfer)
+  // const { shop } = useSelector( state => ({
+  //   shop: state.shop
+  // }))
+  // const shopDatas = selectShopItems(shop);
 
-  const shopData = Object.keys(shopDatas).map(key=> shopDatas[key])
-  console.log(shopData);
+  // const shopData = Object.keys(shopDatas).map(key=> shopDatas[key])
+
   useEffect(() => {
     if(user == null){
       auth.onAuthStateChanged(async user => {
