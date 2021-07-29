@@ -8,9 +8,9 @@ import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 // import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.action'
-import { selectShopItems } from './redux/shop/shop.selectors'
+// import { selectShopItems } from './redux/shop/shop.selectors'
 
 function App() {
 
