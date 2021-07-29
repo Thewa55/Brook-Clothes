@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CollectionPreview from '../collection-preview/collection-preview.component';
 import { selectShopItems,  } from '../../redux/shop/shop.selectors';
 import { useSelector } from 'react-redux';
@@ -12,7 +12,15 @@ const CollectionOverview = () => {
     }))
 
     const shopDatas = selectShopItems(shop)
-    const shopData = Object.keys(shopDatas).map(key=> shopDatas[key])
+    const [shopData, setShopData] = useState([]);
+
+    useEffect(() => {
+        if(shopDatas != null){
+            setShopData(Object.keys(shopDatas).map(key=> shopDatas[key]))
+        } else {
+            setShopData([])
+        }
+    }, [shopDatas])
 
     return (
         <div className='collection-overview'>
