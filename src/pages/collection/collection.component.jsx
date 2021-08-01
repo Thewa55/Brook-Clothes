@@ -12,7 +12,7 @@ const CollectionPage = ({ match }) => {
     }))
 
     const shopData = selectShopItems(shop)
-
+    
     const { title, items} = shopData[match.params.collectionId];
 
     return(

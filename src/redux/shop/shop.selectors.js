@@ -6,3 +6,8 @@ export const selectShopItems = createSelector(
     [selectShop],
     shop => shop.collections
 );
+
+export const selectIsCollectionsLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections
+)

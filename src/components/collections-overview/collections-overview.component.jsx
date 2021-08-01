@@ -11,6 +11,8 @@ const CollectionOverview = () => {
         shop: state.shop
     }))
 
+    console.log(shop)
+
     const shopDatas = selectShopItems(shop)
     const [shopData, setShopData] = useState([]);
 

@@ -6,10 +6,12 @@ import { Route } from 'react-router-dom';
 //import { useSelector } from 'react-redux';
 import CollectionOverview from '../../components/collections-overview/collections-overview.component';
 import CollectionPage from '../collection/collection.component';
-import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils'
-import { useDispatch } from 'react-redux';
-import { updateCollection } from '../../redux/shop/shop.actions';
+//import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils'
+import { useDispatch, useSelector } from 'react-redux';
+// import { updateCollection } from '../../redux/shop/shop.actions';
+import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions';
 import WithSpinner from '../../components/with-spinner/with-spinner.component';
+import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors'
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
@@ -17,42 +19,25 @@ const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 const ShopPage = ({match}) => {
 
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading]= useState(true)
-
+    const [shopData, setShopData] = useState()
     useEffect(() => {
-        const collectionRef = firestore.collection('collections');
 
-        //fetch method to get data from firestore
-        // fetch('https://firestore.googleapis.com/v1//projects/brook-clothes/databases/(default)/documents/collections')
-        //     .then(response => response.json)
-        //     .then(collections => console.log(collections))
 
-        //.get makes an api call to fetch back the data associated to this collectionRef
-        //the difference is that now it's a promise
-        collectionRef.get().then(snapshot => {
-            const shopData = convertCollectionSnapshotToMap(snapshot);
-            dispatch(updateCollection(shopData));
-            setIsLoading(false);
-        });
+        setShopData(dispatch(fetchCollectionStartAsync()));
+        // setIsCollectionLoaded(false)
+    }, [shopData])
 
-        //this is a observable style
-        // collectionRef.onSnapshot(async snapshot => {
-        //     const shopData = convertCollectionSnapshotToMap(snapshot);
-        //     dispatch(updateCollection(shopData));
-        //     setIsLoading(false);
-        // })
-    })
-    // const { shop } = useSelector( state => ({
-    //     shop: state.shop
-    // }))
+    const { shop } = useSelector( state => ({
+        shop: state.shop
+    }))
 
-    // const shopData = selectShopItems(shop)
-    //const [shopData] = useState(SHOP_DATA)
+    const loadStatus = selectIsCollectionsLoaded(shop)
+
 
     return (
         <div className='shop-page'>
-            <Route exact path={`${match.path}`} render={(props) => <CollectionOverviewWithSpinner isLoading={isLoading} {...props}/>} /> 
-            <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={isLoading} {...props} />} />
+            <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={!loadStatus} {...props} />} />
+            <Route exact path={`${match.path}`} render={(props) => <CollectionOverviewWithSpinner isLoading={shop.isLoading} {...props}/>} /> 
         </div>
     )
     
