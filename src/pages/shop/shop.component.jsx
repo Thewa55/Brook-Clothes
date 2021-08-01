@@ -16,19 +16,31 @@ const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 
 const ShopPage = ({match}) => {
 
-    const unsubscribeFromSnapShot = null;
     const dispatch = useDispatch();
     const [isLoading, setIsLoading]= useState(true)
 
     useEffect(() => {
         const collectionRef = firestore.collection('collections');
 
-        collectionRef.onSnapshot(async snapshot => {
+        //fetch method to get data from firestore
+        // fetch('https://firestore.googleapis.com/v1//projects/brook-clothes/databases/(default)/documents/collections')
+        //     .then(response => response.json)
+        //     .then(collections => console.log(collections))
+
+        //.get makes an api call to fetch back the data associated to this collectionRef
+        //the difference is that now it's a promise
+        collectionRef.get().then(snapshot => {
             const shopData = convertCollectionSnapshotToMap(snapshot);
-            console.log(shopData);
             dispatch(updateCollection(shopData));
             setIsLoading(false);
-        })
+        });
+
+        //this is a observable style
+        // collectionRef.onSnapshot(async snapshot => {
+        //     const shopData = convertCollectionSnapshotToMap(snapshot);
+        //     dispatch(updateCollection(shopData));
+        //     setIsLoading(false);
+        // })
     })
     // const { shop } = useSelector( state => ({
     //     shop: state.shop
