@@ -1,46 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
-//import SHOP_DATA from './shopData';
-//import CollectionPreview from '../../components/collection-preview/collection-preview.component'
-//import { selectShopItems } from '../../redux/shop/shop.selectors';
-//import { useSelector } from 'react-redux';
-import CollectionOverview from '../../components/collections-overview/collections-overview.component';
-import CollectionPage from '../collection/collection.component';
-//import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils'
-import { useDispatch, useSelector } from 'react-redux';
-// import { updateCollection } from '../../redux/shop/shop.actions';
+import {useDispatch} from 'react-redux';
+import CollectionOverviewContainer from '../../components/collections-overview/collections-overview.container'; 
+import CollectionPageContainer from '../collection/collection.container';
 import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions';
-import WithSpinner from '../../components/with-spinner/with-spinner.component';
-import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors'
 
-const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
-const CollectionPageWithSpinner = WithSpinner(CollectionPage)
+
+//import SHOP_DATA from './shopData';
+//import { updateCollection } from '../../redux/shop/shop.actions';
+//import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils'
+
+//All the imports below are commented out due to creation of the container file
+// import WithSpinner from '../../components/with-spinner/with-spinner.component';
+// import CollectionPage from '../collection/collection.component';
+// import CollectionOverview from '../../components/collections-overview/collections-overview.component';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors'
+// const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
+// const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 
 const ShopPage = ({match}) => {
 
     const dispatch = useDispatch();
-    const [shopData, setShopData] = useState()
+
     useEffect(() => {
-
-
-        setShopData(dispatch(fetchCollectionStartAsync()));
-        // setIsCollectionLoaded(false)
-    }, [shopData])
-
-    const { shop } = useSelector( state => ({
-        shop: state.shop
-    }))
-
-    const loadStatus = selectIsCollectionsLoaded(shop)
-
+        dispatch(fetchCollectionStartAsync());
+    }, [])
 
     return (
         <div className='shop-page'>
-            <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={!loadStatus} {...props} />} />
-            <Route exact path={`${match.path}`} render={(props) => <CollectionOverviewWithSpinner isLoading={shop.isLoading} {...props}/>} /> 
+            <Route path={`${match.path}/:collectionId`} component={CollectionPageContainer} />
+            <Route exact path={`${match.path}`} component= {CollectionOverviewContainer} />  
         </div>
     )
     
+    
+    //Code commented out due to container components
+    // const { shop } = useSelector( state => ({
+    //     shop: state.shop
+    // }))
+    // const loadStatus = selectIsCollectionsLoaded(shop)            
+    //<Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={!loadStatus} {...props} />} />
+    //<Route exact path={`${match.path}`} render={(props) => <CollectionOverviewWithSpinner isLoading={shop.isLoading} {...props}/>} /> 
+
 }
 
 export default ShopPage;
