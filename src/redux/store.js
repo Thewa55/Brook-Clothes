@@ -3,7 +3,7 @@ import logger from "redux-logger";
 import { persistStore } from "redux-persist";
 import createSagaMiddleware from "@redux-saga/core";
 import rootReducer from "./root-reducer";
-
+import { fetchCollectionsStart } from "./shop/shop.sagas";
 //old thunk code
 import thunk  from "redux-thunk";
 // const middlewares = [thunk];
@@ -22,7 +22,7 @@ if(process.env.NODE_ENV === 'development'){
 //we are spreading the middleware so if we add more middleware we can add them into the array
 const store = createStore(rootReducer, applyMiddleware(...middlewares))
 
-//sagaMiddleware.run()
+sagaMiddleware.run(fetchCollectionsStart)
 
 const persistor = persistStore(store)
 

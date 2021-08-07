@@ -3,12 +3,14 @@ import { Route } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import CollectionOverviewContainer from '../../components/collections-overview/collections-overview.container'; 
 import CollectionPageContainer from '../collection/collection.container';
-import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions';
-
+import { fetchCollectionStart } from '../../redux/shop/shop.actions';
 
 //import SHOP_DATA from './shopData';
 //import { updateCollection } from '../../redux/shop/shop.actions';
 //import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils'
+
+//part of thunk import
+// import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions';
 
 //All the imports below are commented out due to creation of the container file
 // import WithSpinner from '../../components/with-spinner/with-spinner.component';
@@ -24,7 +26,7 @@ const ShopPage = ({match}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCollectionStartAsync());
+        dispatch(fetchCollectionStart());
     }, [])
 
     return (
