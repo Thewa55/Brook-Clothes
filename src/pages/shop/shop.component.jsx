@@ -27,7 +27,7 @@ const ShopPage = ({match}) => {
 
     useEffect(() => {
         dispatch(fetchCollectionStart());
-    }, [])
+    }, [dispatch])
 
     return (
         <div className='shop-page'>

@@ -5,12 +5,12 @@ import createSagaMiddleware from "@redux-saga/core";
 import rootReducer from "./root-reducer";
 import { fetchCollectionsStart } from "./shop/shop.sagas";
 //old thunk code
-import thunk  from "redux-thunk";
+//import thunk  from "redux-thunk";
 // const middlewares = [thunk];
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [sagaMiddleware, thunk]
+const middlewares = [sagaMiddleware]
 
 
 

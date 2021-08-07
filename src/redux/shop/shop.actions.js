@@ -1,6 +1,10 @@
 import ShopActionTypes from "./shop.types";
-import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils'
 
+//this import is part of thunk
+//import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils'
+
+
+//this is our action before the introduction of thunks
 // export const updateCollection = collectionsMap => ({
 //     type: ShopActionTypes.UPDATE_COLLECTION,
 //     payload: collectionsMap
@@ -20,16 +24,18 @@ export const fethcCollectionFailure = error => ({
     payload: error
 })
 
-export const fetchCollectionStartAsync = () => {
-    return dispatch => {
-        const collectionRef = firestore.collection('collections');
-        dispatch(fetchCollectionStart)
 
-        collectionRef.get().then(snapshot => {
-            const shopData = convertCollectionSnapshotToMap(snapshot);
-            dispatch(fetchCollectionSuccess(shopData));
-        }).catch(error => 
-            dispatch(fethcCollectionFailure(error.message))
-        );
-    }
-};
+//depreciated code when Thunk was used
+// export const fetchCollectionStartAsync = () => {
+//     return dispatch => {
+//         const collectionRef = firestore.collection('collections');
+//         dispatch(fetchCollectionStart)
+
+//         collectionRef.get().then(snapshot => {
+//             const shopData = convertCollectionSnapshotToMap(snapshot);
+//             dispatch(fetchCollectionSuccess(shopData));
+//         }).catch(error => 
+//             dispatch(fethcCollectionFailure(error.message))
+//         );
+//     }
+// };
