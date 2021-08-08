@@ -1,7 +1,8 @@
 //takeEvery - Listens for every action of a specific type we pass to Saga
 //call - is the effect that invokes a method
 //put - 
-import { takeEvery, call, put } from "@redux-saga/core/effects";
+//takeLatest - is similar to takeEvery except if multiple Sagas are fired, we only resolve the last Sagas
+import { takeEvery, call, put, takeLatest } from "@redux-saga/core/effects";
 
 import { firestore, convertCollectionSnapshotToMap } from "../../firebase/firebase.utils";
 import { fetchCollectionSuccess, fethcCollectionFailure } from "./shop.actions";
@@ -12,7 +13,8 @@ export function* fetchCollectionsStart(){
     //the first parameter in takeEvery is the first action we want, the second paramter is another generator function that runs in response to the first action
     //takeEvery is a non blocking call, in order to not stop the app to wait for the async call
     //if we fire fetch collection start again, we can cancel the previous request. Every yield we yield the control from Saga to the middleware
-    yield takeEvery(ShopActionTypes.FETCH_COLLECTION_START, fetchCollectionsAsync)
+    // yield takeEvery(ShopActionTypes.FETCH_COLLECTION_START, fetchCollectionsAsync)
+    yield takeLatest(ShopActionTypes.FETCH_COLLECTION_START, fetchCollectionsAsync)
 };
 
 export function* fetchCollectionsAsync(){
