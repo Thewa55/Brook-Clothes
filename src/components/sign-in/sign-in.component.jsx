@@ -3,9 +3,12 @@ import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 import './sign-in.style.scss'
 import { signInWithGoogle, auth } from '../../firebase/firebase.utils'
-
+import { googleSignInStart } from '../../redux/user/user.action'
+import { useDispatch } from 'react-redux'
 
 const SignIn = () => {
+
+    const dispatch = useDispatch();
 
     const [userInfo, setUserInfo] = useState({email: '', password: ''})
 
@@ -51,7 +54,9 @@ const SignIn = () => {
                     required />
                 <div className='buttons'>     
                     <CustomButton type='submit'> Sign In </CustomButton>
-                    <CustomButton type='button' onClick={signInWithGoogle} isGoogleSignIn> Google Sign In </CustomButton>
+                    {/* <CustomButton type='button' onClick={signInWithGoogle} isGoogleSignIn> Google Sign In </CustomButton> */}
+                    {/*When dispatching Sagas, we need to dispatch invoking the function ( googleSignInStart() vs googleSignInStart) */}
+                    <CustomButton type='button' onClick={() => dispatch(googleSignInStart())} isGoogleSignIn> Google Sign In </CustomButton>
                 </div>
             </form>
         </div>

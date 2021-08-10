@@ -94,11 +94,16 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 //this is pulled from the auth
-const provider = new firebase.auth.GoogleAuthProvider()
+//const provider = new firebase.auth.GoogleAuthProvider()
 
 //we always want to always trigger google popup whenever we use the google auth provider for authentication and sign in
-provider.setCustomParameters({prompt: 'select_account'})
+//provider.setCustomParameters({prompt: 'select_account'})
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider)
+//export const signInWithGoogle = () => auth.signInWithPopup(provider)
+
+//new export for Sagas
+export const googleProvider =  new firebase.auth.GoogleAuthProvider()
+googleProvider.setCustomParameters({prompt: 'select_account'})
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider)
 
 export default firebase;

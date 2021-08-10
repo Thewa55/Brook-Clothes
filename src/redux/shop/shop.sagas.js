@@ -18,7 +18,7 @@ export function* fetchCollectionsStart(){
 };
 
 export function* fetchCollectionsAsync(){
-    yield console.log('This is fired'); 
+    // yield console.log('This is fired'); 
 
     //sagas do not dispatch actions using dispatch keyword, instead it uses the put effect
     try {

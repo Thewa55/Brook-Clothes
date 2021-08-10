@@ -14,7 +14,7 @@ import { setCurrentUser } from './redux/user/user.action'
 
 function App() {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [user, setUser ] = useState();
 
   //Code for putting store data into Firebase (one time data transfer)
@@ -30,25 +30,25 @@ function App() {
       auth.onAuthStateChanged(async user => {
         if(user){
           //we are passing the user into createUserProfileDocument and returning the user reference from firestore
-          const userRef = await createUserProfileDocument(user)
+          //const userRef = await createUserProfileDocument(user)
 
           //a snapshot lets us check if a document exists at this query
-          userRef.onSnapshot(snapShot => {
+          // userRef.onSnapshot(snapShot => {
 
-            //snapShot doesn't give us access to any of the properties, using snapShot.data() gives us the data in an object
-            console.log(snapShot.data())
-            setUser({
-              id:snapShot.id,
-              ...snapShot.data()
-            })
+          //   //snapShot doesn't give us access to any of the properties, using snapShot.data() gives us the data in an object
+          //   console.log(snapShot.data())
+          //   setUser({
+          //     id:snapShot.id,
+          //     ...snapShot.data()
+          //   })
 
-            dispatch(setCurrentUser(
-              {id:snapShot.id,
-              ...snapShot.data()}
-            ))
+          //   dispatch(setCurrentUser(
+          //     {id:snapShot.id,
+          //     ...snapShot.data()}
+          //   ))
 
-          })
-          // setUser(user)
+          // })
+          setUser(user)
           // createUserProfileDocument(user)
         } else {
           setUser(user)
