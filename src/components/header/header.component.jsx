@@ -20,6 +20,7 @@ const Header = () => {
         cart: state.cart
     }))
 
+    console.log(currentUser)
     const dispatch = useDispatch()
 
     const loggedInUser = selectCurrentUser(currentUser)

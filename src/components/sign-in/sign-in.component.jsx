@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 import './sign-in.style.scss'
-import { signInWithGoogle, auth } from '../../firebase/firebase.utils'
-import { googleSignInStart } from '../../redux/user/user.action'
+//import { signInWithGoogle, auth } from '../../firebase/firebase.utils'
+import { googleSignInStart, emailSignInStart } from '../../redux/user/user.action'
 import { useDispatch } from 'react-redux'
 
 const SignIn = () => {
@@ -15,16 +15,19 @@ const SignIn = () => {
     const handleSubmit = async event => {
         event.preventDefault()
 
-        const {email, password} = userInfo
-        try {
+        dispatch(emailSignInStart(userInfo));
 
-            //auth method where you can pass the email and password to be authenticated
-            await auth.signInWithEmailAndPassword(email, password);
+        //Moving all the async callbacks into Sagas
+        // const {email, password} = userInfo
+        // try {
 
-            setUserInfo(prevState => ({ ...prevState, email: '', password: ''}))
-        } catch (error) {
-            console.log(error)
-        }
+        //     //auth method where you can pass the email and password to be authenticated
+        //     await auth.signInWithEmailAndPassword(email, password);
+
+        //     setUserInfo(prevState => ({ ...prevState, email: '', password: ''}))
+        // } catch (error) {
+        //     console.log(error)
+        // }
         
     }   
 
