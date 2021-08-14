@@ -24,6 +24,8 @@ export const signInFailure = error => ({
     payload: error
 });
 
+
+
 //refactored to only use one sign-in
 // export const googleSignInSuccess = user => ({
 //     type: UserActionTypes.GOOGLE_SIGN_IN_SUCCESS,

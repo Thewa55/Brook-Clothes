@@ -35,7 +35,6 @@ function App() {
   useEffect(() => {
     if(user == null){
       auth.onAuthStateChanged(async user => {
-        console.log(user)
         if(user){
 
           setUser(user)
