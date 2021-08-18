@@ -9,6 +9,7 @@ import { setCurrentUser } from '../../redux/user/user.action'
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { HeaderContainer, LogoContainer, OptionsContainer, OptionLinks } from './header.styles'
+import { signOutStart } from '../../redux/user/user.action';
 //import './header.style.scss'
 
 
@@ -28,8 +29,9 @@ const Header = () => {
     const cartVisiblity = selectCartHidden(cart)
 
     const logout = () => {
-        auth.signOut()
-        dispatch(setCurrentUser(null))
+        // auth.signOut()
+        // dispatch(setCurrentUser(null))
+        dispatch(signOutStart())
     }
 
     return (

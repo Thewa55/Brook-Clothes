@@ -2,7 +2,7 @@ import { takeLatest, put, all, call } from "@redux-saga/core/effects";
 import UserActionTypes from "./user.types";
 import { auth, googleProvider, createUserProfileDocument } from "../../firebase/firebase.utils";
 //import { googleSignInSuccess, googleSignInFailure, emailSignInSuccess, emailSignInFailure } from "./user.action";
-import { signInSuccess, signInFailure } from "./user.action";
+import { signInSuccess, signInFailure, signOutFailure, signOutSuccess, signOutStart } from "./user.action";
 
 export function* getSnapshotFromUserAuth(userAuth){
     try{
@@ -71,8 +71,26 @@ export function* onEmailSignInStart(){
     yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, onSignInWithEmail)
 }
 
+export function* signOut(){
+    try{
+        yield auth.signOut();
+        yield put(signOutSuccess());
+    }catch(error) {
+        yield put(signOutFailure(error))
+    }
+}
+
+export function* onSignOutStart(){
+    yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut)
+}
+
 export function* userSagas(){
 
     //we need the call effect inside of the all effect, otherwise only the GOOGLE_SIGN_IN_START action will be called and onSignInWithGoogle generator function will not be called
-    yield all([call(onGoogleSignInStart), call(onEmailSignInStart)]);
+    yield all([
+        call(onGoogleSignInStart), 
+        call(onEmailSignInStart), 
+        call(onSignOutStart)
+    ]);
 }
+
